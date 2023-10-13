@@ -6,6 +6,7 @@
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
   </head>
   <body>
     <div id="root"></div>
@@ -13,17 +14,25 @@
     <script type="text/babel">
       const root = document.getElementById("root");
       function App() {
-        const [counter, setCounter] = React.useState(0);
-        const onClick = () => {
-          setCounter((current) => current + 1);
+        const Btn = ({ text = "button" }) => {
+          return (
+            <button
+              style={{
+                backgroundColor: "tomato",
+                color: "white",
+                borderRadius: 15,
+                border: 0,
+                padding: "10px 20px",
+              }}
+            >
+              {text}
+            </button>
+          );
         };
-
-        return (
-          <div>
-            <h3>Total clicks: {counter}</h3>
-            <button onClick={onClick}>Click!</button>
-          </div>
-        );
+        Btn.propTypes = {
+          text: PropTypes.string.isRequired,
+        };
+        return <Btn text="This is button" />;
       }
       ReactDOM.render(<App />, root);
     </script>
